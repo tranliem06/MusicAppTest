@@ -7,7 +7,7 @@ import {
   MdRepeat,
   MdOutlineMusicNote,
 } from "react-icons/md";
-import { HiOutlineChartPie } from "react-icons/hi";
+import { HiOutlineChartPie, HiUserGroup } from "react-icons/hi";
 // import { TbChartArcs } from "react-icons/tb";
 import {
   AiOutlineArrowLeft,
@@ -22,9 +22,12 @@ import {
   BsPauseFill,
   BsMusicNoteBeamed,
   BsDot,
+  BsFillPersonFill,
+  BsBarChartFill,
 } from "react-icons/bs";
 // import { CiRepeat, CiShuffle } from "react-icons/ci";
 import { BiLineChartDown } from "react-icons/bi";
+import { RiEarthFill } from "react-icons/ri";
 
 const icons = {
   MdOutlineLibraryMusic,
@@ -47,6 +50,11 @@ const icons = {
   BiLineChartDown,
   MdOutlineMusicNote,
   BsDot,
+  BsFillPersonFill,
+  BsBarChartFill,
+
+  RiEarthFill,
+  HiUserGroup,
 };
 
 export default icons;

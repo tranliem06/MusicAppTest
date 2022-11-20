@@ -9,13 +9,13 @@ const NewRelease = () => {
   const [isActived, setIsActived] = useState(0);
   const [songs, setSongs] = useState([]);
 
-  console.log(newRelease);
+  // console.log(newRelease);
   useEffect(() => {
     isActived
       ? setSongs(newRelease?.items?.others)
       : setSongs(newRelease?.items?.vPop);
   }, [isActived, newRelease]);
-  console.log(songs);
+  // console.log(songs);
   return (
     <div className="mt-12 px-[59px] flex flex-col gap-5">
       <div className="flex items-center justify-between">

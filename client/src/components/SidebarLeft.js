@@ -1,6 +1,8 @@
 import React from "react";
 import { sidebarMenu } from "../utils/menu";
 import { NavLink } from "react-router-dom";
+import { Premium } from "../assets/img";
+import { FaCrown } from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
 // import path from "./../ultis/path";
@@ -28,6 +30,23 @@ const SidebarLeft = () => {
             <span>{item.text}</span>
           </NavLink>
         ))}
+      </div>
+      <div className="flex flex-col gap-2">
+        <div className="mx-4 rounded-md">
+          <img
+            src={Premium}
+            alt="premium"
+            className="object-contain  rounded-lg"
+          />
+        </div>
+        <div className="mx-4 mb-4 rounded-md bg-[#fdd100] flex flex-col items-center justify-center py-2">
+          <span>
+            <FaCrown size={40} />
+          </span>
+          <span className="text-center text-[14px] font-semibold">
+            Upgrage to Premium
+          </span>
+        </div>
       </div>
     </div>
   );

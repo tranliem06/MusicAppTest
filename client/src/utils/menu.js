@@ -1,33 +1,28 @@
 import icons from "./icons";
 
-const {
-  MdOutlineLibraryMusic,
-  HiOutlineChartPie,
-  BiLineChartDown,
-  MdOutlineFeed,
-} = icons;
+const { BsFillPersonFill, RiEarthFill, BsBarChartFill, HiUserGroup } = icons;
 
 export const sidebarMenu = [
   {
     path: "myMusic",
     text: "Personal",
-    icons: <MdOutlineLibraryMusic size={24} />,
+    icons: <BsFillPersonFill size={24} />,
   },
 
   {
     path: "",
     text: "Explore",
     end: true,
-    icons: <HiOutlineChartPie size={24} />,
+    icons: <RiEarthFill size={24} />,
   },
   {
     path: "zing-chart",
     text: "TopSong",
-    icons: <BiLineChartDown size={24} />,
+    icons: <BsBarChartFill size={24} />,
   },
   {
-    path: "Follow",
-    text: "Follow",
-    icons: <MdOutlineFeed size={24} />,
+    path: "allartists",
+    text: "Artists",
+    icons: <HiUserGroup size={24} />,
   },
 ];

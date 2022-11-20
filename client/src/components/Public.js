@@ -18,12 +18,12 @@ const Public = () => {
   return (
     <div className=" w-full flex flex-col min-h-screen ">
       <div className="w-full h-full flex flex-col flex-auto">
-        <div className="w-full flex-none shadow-md ">
+        <div className="w-full flex-none shadow-md z-30">
           <Header />
         </div>
 
         <div className="w-full h-full flex flex-auto">
-          <div className="w-[240px] flex-none shadow-md">
+          <div className="w-[240px] flex-none shadow-md z-20">
             <SidebarLeft />
           </div>
           <div className="flex-auto mt-4 ">

@@ -23,6 +23,8 @@ import {
   UserProfile,
   Public,
   Album,
+  Artists,
+  Artist,
   WeekRank,
 } from "./components";
 
@@ -116,7 +118,7 @@ function App() {
         const response = await fetch(resquestUrl);
         const responseJSON = await response.json();
         // console.log("hello");
-        console.log({ responseJSON });
+        // console.log({ responseJSON });
         setIsLoading(false);
 
         dispatch({
@@ -143,6 +145,8 @@ function App() {
             <Route path="" element={<Home />} />
             <Route path="album/:title/:pid" element={<Album />} />
             <Route path="playlist/:title/:pid" element={<Album />} />
+            <Route path="allartists" element={<Artists />} />
+            <Route path="allartists/:name" element={<Artist />} />
             {/* <Route path="zing-chart-tuan/:title/:pid" element={<WeekRank />} /> */}
           </Route>
           <Route path="/dashboard/*" element={<Dashboard />} />

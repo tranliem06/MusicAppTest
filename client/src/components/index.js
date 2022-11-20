@@ -39,3 +39,6 @@ export { default as SongItem } from "./SongItem";
 export { default as WeekRank } from "./WeekRank";
 export { default as NewRelease } from "./NewRelease";
 export { default as ChartSection } from "./ChartSection";
+export { default as SongItemHome } from "./SongItemHome";
+export { default as Artist } from "./Artist";
+export { default as Artists } from "./Artists";

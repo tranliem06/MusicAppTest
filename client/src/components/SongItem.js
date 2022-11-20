@@ -31,7 +31,7 @@ const SongItem = ({
     dispatch,
   ] = useStateValue();
 
-  console.log(state);
+  // console.log(state);
   return (
     <div
       onClick={() => {
