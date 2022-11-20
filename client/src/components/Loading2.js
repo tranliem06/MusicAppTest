@@ -7,7 +7,7 @@ const Loading2 = () => {
       <Bars
         height="80"
         width="80"
-        color="#4fa94d"
+        color="#4285f4"
         ariaLabel="bars-loading"
         wrapperStyle={{}}
         wrapperClass=""

@@ -17,12 +17,13 @@ import { getAllAlbums, getAllArtist, getAllSongs, validateUser } from "./api";
 import {
   Dashboard,
   Home,
-  Loader,
+  Loading2,
   Login,
   MusicPlayer,
   UserProfile,
   Public,
   Album,
+  WeekRank,
 } from "./components";
 
 import { useStateValue } from "./Context/StateProvider";
@@ -65,7 +66,7 @@ function App() {
     }
   }, []);
   useEffect(() => {
-    setIsLoading(true);
+    // setIsLoading(true);
     firebaseAuth.onAuthStateChanged((userCred) => {
       if (userCred) {
         userCred.getIdToken().then((token) => {
@@ -78,14 +79,15 @@ function App() {
             });
           });
         });
-        setIsLoading(false);
+        // setIsLoading(false);
       } else {
         setAuth(false);
         dispatch({
           type: actionType.SET_USER,
           user: null,
         });
-        setIsLoading(false);
+        // setIsLoading(false);
+        console.log(isLoading);
         window.localStorage.setItem("auth", "false");
         navigate("/login");
       }
@@ -107,12 +109,15 @@ function App() {
   useEffect(() => {
     if (banner.length === 0) {
       async function fetchHomeData() {
+        setIsLoading(true);
+
         // ...
         const resquestUrl = "https://api-zingmp3-public.herokuapp.com/api/home";
         const response = await fetch(resquestUrl);
         const responseJSON = await response.json();
         // console.log("hello");
-        // console.log({ responseJSON });
+        console.log({ responseJSON });
+        setIsLoading(false);
 
         dispatch({
           type: actionType.GET_HOME,
@@ -126,19 +131,19 @@ function App() {
 
   return (
     <AnimatePresence>
-      <div className="h-auto flex items-center justify-center min-w-[680px]">
-        {isLoading ||
-          (!user && (
-            <div className="fixed inset-0 bg-loaderOverlay backdrop-blur-sm ">
-              <Loader />
-            </div>
-          ))}
+      <div className="relative h-auto flex items-center justify-center min-w-[680px]">
+        {isLoading && (
+          <div className="absolute top-0 bottom-0 left-0 right-0 z-50 bg-[#f5f3f3] flex items-center justify-center">
+            <Loading2 />
+          </div>
+        )}
         <Routes>
           <Route path="/login" element={<Login setAuth={setAuth} />} />
           <Route path="/*" element={<Public />}>
             <Route path="" element={<Home />} />
             <Route path="album/:title/:pid" element={<Album />} />
             <Route path="playlist/:title/:pid" element={<Album />} />
+            {/* <Route path="zing-chart-tuan/:title/:pid" element={<WeekRank />} /> */}
           </Route>
           <Route path="/dashboard/*" element={<Dashboard />} />
           <Route path="/userProfile" element={<UserProfile />} />

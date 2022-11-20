@@ -132,7 +132,7 @@ const MusicPlayer = () => {
                 });
               }}
             >
-              <RiPlayListFill className="text-textColor hover:text-headingColor text-3xl cursor-pointer" />
+              <RiPlayListFill className="text-textColor hover:text-headingColor text-3xl cursor-pointer w-6 h-6" />
             </motion.i>
           </div>
         </div>

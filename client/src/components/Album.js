@@ -4,22 +4,31 @@ import { GetDetailPlaylist } from "../api";
 import moment from "moment";
 import { Scrollbars } from "react-custom-scrollbars-2";
 
-import { Lists, Loading2 } from "../components";
+import { Lists, Loading2, Loading } from "../components";
 import { actionType } from "../Context/reducer";
 import { useStateValue } from "../Context/StateProvider";
 
 const Album = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const { title, pid } = useParams();
   // console.log({ title, pid });
 
-  const [{ curPlaylistZing }, dispatch] = useStateValue();
+  const [{ curPlaylistZing, isLoading }, dispatch] = useStateValue();
 
   const [playlistData, setPlaylistData] = useState({});
   useEffect(() => {
     const fetchDetailPlaylist = async () => {
+      dispatch({
+        type: actionType.LOADING,
+        isLoading: true,
+      });
       const response = await GetDetailPlaylist(pid);
       console.log(response);
+
+      dispatch({
+        type: actionType.LOADING,
+        isLoading: false,
+      });
       //   console.log(response.data);
       if (response?.data.err === 0) {
         setPlaylistData(response.data?.data);
@@ -36,9 +45,12 @@ const Album = () => {
   //   console.log(playlistData.song.items);
   return (
     <div className="flex relative gap-8 w-full h-full px-[59px] pt-5">
-      <div className="absolute top-0 bottom-0 left-0 right-0 z-50 bg-overlay-30">
-        {/* <Loading2 /> */}
-      </div>
+      {isLoading && (
+        <div className="absolute top-0 bottom-0 left-0 right-0 z-50 bg-[#f5f3f3] flex items-center justify-center">
+          <Loading2 />
+          {/* <Loading /> */}
+        </div>
+      )}
       <div className="flex-none w-1/4 border border-red-500 flex flex-col items-center gap-2">
         <img
           src={playlistData?.thumbnailM}

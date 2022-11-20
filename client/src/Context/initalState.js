@@ -19,12 +19,21 @@ export const initialState = {
   curPlaylistZing: null,
   isSongZingPlaying: false,
 
+  isLoading: false,
+  isLoadingHome: false,
+
   isCurrentSongVip: false,
 
   today: {},
   newSongEveryday: {},
   top100: {},
   xone: {},
+  newMusic: [],
+  newRelease: {},
+  weekChart: [],
+  favoritedArtist: {},
+  chart: {},
+  rank: [],
 
   //** STOP PLAYLIST ALL SONG */
   isPlayListAllSong: false,

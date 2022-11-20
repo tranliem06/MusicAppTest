@@ -23,6 +23,9 @@ export const actionType = {
 
   SET_PLAYLIST_ZING: "SET_PLAYLIST_ZING",
   SET_CURRENT_VIP: "SET_CURRENT_VIP",
+
+  LOADING: "LOADING",
+  LOADING_HOME: "LOADING_HOME",
 };
 
 const reducer = (state, action) => {
@@ -130,6 +133,25 @@ const reducer = (state, action) => {
           action.homeData?.find((item) => item.sectionId === "h100") || null,
         xone:
           action.homeData?.find((item) => item.sectionId === "hXone") || null,
+        newRelease:
+          action.homeData?.find((item) => item.sectionType === "new-release") ||
+          {},
+        newMusic:
+          {
+            ...action.homeData?.find((item) => item.sectionId === "hAlbum"),
+            title: "New Music",
+          } || {},
+        weekChart:
+          action.homeData?.find((item) => item.sectionType === "weekChart")
+            ?.items || [],
+        favoritedArtist:
+          action.homeData?.find((item) => item.sectionId === "hMix") || {},
+        chart:
+          action.homeData?.find((item) => item.sectionId === "hZC")?.chart ||
+          {},
+        rank:
+          action.homeData?.find((item) => item.sectionId === "hZC")?.items ||
+          [],
       };
 
     case actionType.SET_CUR_SONG_ID:
@@ -163,6 +185,16 @@ const reducer = (state, action) => {
       return {
         ...state,
         isCurrentSongVip: action.isCurrentSongVip,
+      };
+    case actionType.LOADING:
+      return {
+        ...state,
+        isLoading: action.isLoading,
+      };
+    case actionType.LOADING_HOME:
+      return {
+        ...state,
+        isLoadingHome: action.isLoadingHome,
       };
 
     default:

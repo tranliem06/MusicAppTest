@@ -10,6 +10,7 @@ import {
 } from "../components";
 import { useStateValue } from "../Context/StateProvider";
 import { motion } from "framer-motion";
+// import { Scrollbars } from "react-custom-scrollbars-2";
 
 const Public = () => {
   const [{ isSongPlaying, isSongZingPlaying }, dispatch] = useStateValue();
@@ -25,7 +26,7 @@ const Public = () => {
           <div className="w-[240px] flex-none border border-blue-500">
             <SidebarLeft />
           </div>
-          <div className="flex-auto border border-red-500 pb-10 ">
+          <div className="flex-auto border border-red-500  ">
             <Outlet />
           </div>
           <div className="w-[329px]  1600:flex flex-none border border-green-500 animate-slide-left">

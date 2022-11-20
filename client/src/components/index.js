@@ -35,3 +35,6 @@ export { default as MusicPlayerZing } from "./MusicPlayerZing";
 export { default as Section } from "./Section";
 export { default as Loading } from "./Loading";
 export { default as Loading2 } from "./Loading2";
+export { default as SongItem } from "./SongItem";
+export { default as WeekRank } from "./WeekRank";
+export { default as NewRelease } from "./NewRelease";

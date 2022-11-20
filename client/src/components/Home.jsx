@@ -13,9 +13,11 @@ import {
   Header,
   Filter,
   Section,
+  NewRelease,
 } from "../components";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [
@@ -28,6 +30,9 @@ const Home = () => {
       newSongEveryday,
       top100,
       xone,
+      newMusic,
+      weekChart,
+      favoritedArtist,
       artistFilter,
       filterTerm,
       albumFilter,
@@ -36,8 +41,6 @@ const Home = () => {
     },
     dispatch,
   ] = useStateValue();
-
-  // const [filteredSongs, setFilteredSongs] = useState(null);
 
   useEffect(() => {
     if (!allSongs) {
@@ -50,82 +53,18 @@ const Home = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (searchTerm.length > 0) {
-  //     const filtered = allSongs.filter(
-  //       (data) =>
-  //         data.artist.toLowerCase().includes(searchTerm) ||
-  //         data.language.toLowerCase().includes(searchTerm) ||
-  //         data.name.toLowerCase().includes(searchTerm) ||
-  //         data.artist.includes(artistFilter)
-  //     );
-  //     setFilteredSongs(filtered);
-  //   } else {
-  //     setFilteredSongs(null);
-  //   }
-  // }, [searchTerm]);
-
-  // useEffect(() => {
-  //   const filtered = allSongs?.filter((data) => data.artist === artistFilter);
-  //   if (filtered) {
-  //     setFilteredSongs(filtered);
-  //   } else {
-  //     setFilteredSongs(null);
-  //   }
-  // }, [artistFilter]);
-
-  // useEffect(() => {
-  //   const filtered = allSongs?.filter(
-  //     (data) => data.category.toLowerCase() === filterTerm
-  //   );
-  //   if (filtered) {
-  //     setFilteredSongs(filtered);
-  //   } else {
-  //     setFilteredSongs(null);
-  //   }
-  // }, [filterTerm]);
-
-  // useEffect(() => {
-  //   const filtered = allSongs?.filter((data) => data.album === albumFilter);
-  //   if (filtered) {
-  //     setFilteredSongs(filtered);
-  //   } else {
-  //     setFilteredSongs(null);
-  //   }
-  // }, [albumFilter]);
-
-  // useEffect(() => {
-  //   const filtered = allSongs?.filter(
-  //     (data) => data.language === languageFilter
-  //   );
-  //   if (filtered) {
-  //     setFilteredSongs(filtered);
-  //   } else {
-  //     setFilteredSongs(null);
-  //   }
-  // }, [languageFilter]);
-
   return (
-    <Scrollbars style={{ width: "100%", height: "100%" }}>
-      <div className="w-full h-auto flex flex-col items-center justify-center bg-primary mb-10">
-        {/* <Header /> */}
-        {/* <SearchBar /> */}
-
-        {/* {searchTerm.length > 0 && (
-          <p className="my-4 text-base text-textColor">
-            Searched for :
-            <span className="text-xl text-cartBg font-semibold">
-              {searchTerm}
-            </span>
-          </p>
-        )} */}
-
+    <Scrollbars autoHide style={{ width: "100%", height: "100%" }}>
+      <div className="w-full h-auto flex flex-col items-center justify-center bg-primary mb-20">
         <div>
           <div>
             <Slider />
           </div>
           <div>
             <Section data={today} />
+          </div>
+          <div>
+            <NewRelease />
           </div>
           <div>
             <Section data={top100} />
@@ -135,6 +74,65 @@ const Home = () => {
           </div>
           <div>
             <Section data={xone} />
+          </div>
+          <div>
+            <Section data={newMusic} />
+          </div>
+          <div className="flex items-center px-[43px] w-full mt-12">
+            {weekChart?.map((item) => (
+              <div
+                to={item?.link?.split(".")[0]}
+                key={item.link}
+                className="flex-1 px-4"
+              >
+                <img
+                  src={item.cover}
+                  alt="cover"
+                  className=" w-full object-cover rounded-md"
+                />
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 px-[59px] flex flex-col gap-5">
+            <div className="flex items-center justify-between">
+              <h3 className="text-5 font-bold text-[#4285f4]">
+                Favorite Aritst
+              </h3>
+              <span className="text-xs">All</span>
+            </div>
+            <div className="flex mx-[-16px]">
+              {favoritedArtist?.items
+                ?.filter((i, index) => index <= 4)
+                .map((singer) => {
+                  return (
+                    <div key={singer.encodeId} className="flex-1 px-4 relative">
+                      <img
+                        src={singer.thumbnail}
+                        alt="singer"
+                        className="w-full object-contain rounded-md"
+                      />
+                      <div className="absolute w-full bottom-[16px] flex justify-evenly pr-8">
+                        <img
+                          src={singer?.song?.items[0].thumbnail}
+                          alt="singer"
+                          className="w-[25%] rounded-md object-cover"
+                        />
+                        <img
+                          src={singer?.song?.items[1].thumbnail}
+                          alt="singer"
+                          className="w-[25%] rounded-md object-cover"
+                        />
+                        <img
+                          src={singer?.song?.items[2].thumbnail}
+                          alt="singer"
+                          className="w-[25%] rounded-md object-cover"
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
           <div className="w-full h-auto flex flex-col p-[59px] gap-4">
             <div>
@@ -172,7 +170,7 @@ export const HomeSongContainer = ({ musics }) => {
         isPlayListZing: false,
       });
     }
-    if (isPlayListZing) {
+    if (!isPlayListAllSong) {
       dispatch({
         type: actionType.SET_PLAYLIST_ALL_SONG,
         isPlayListAllSong: true,

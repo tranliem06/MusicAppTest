@@ -42,8 +42,10 @@ const PlayListCard = () => {
             initial={{ opacity: 0, translateX: 150 }}
             animate={{ opacity: 1, translateX: 0 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
-            className={`group w-full p-2 hover:bg-card flex gap-3 items-center cursor-pointer ${
-              music?._id === song._id ? "bg-card" : "bg-transparent"
+            className={`group w-full p-2 hover:bg-gray-300 flex gap-3 items-center cursor-pointer ${
+              music?._id === allSongs[song]._id
+                ? "bg-[#4285f4]"
+                : "bg-transparent"
             }`}
             onClick={() => setCurrentPlaySong(index)}
             key={song._id}
@@ -56,7 +58,13 @@ const PlayListCard = () => {
               />
             </div>
             <div className="w-auto flex flex-col">
-              <p className="text-[12px] text-headingColor font-semibold">
+              <p
+                className={`text-[12px] ${
+                  music?._id === allSongs[song]._id
+                    ? "text-white"
+                    : "text-headingColor"
+                } font-semibold`}
+              >
                 {`${
                   music?.name.length > 25
                     ? `${music?.name.slice(0, 25)}...`
@@ -64,7 +72,13 @@ const PlayListCard = () => {
                 }`}
                 {/* <span className="text-base">({music?.album})</span> */}
               </p>
-              <p className="text-[10px] text-textColor">
+              <p
+                className={`text-[10px] ${
+                  music?._id === allSongs[song]._id
+                    ? "text-white"
+                    : "text-textColor"
+                }`}
+              >
                 {music?.artist}
                 {/* <span className="text-sm text-textColor font-semibold">
                     ({music?.category})

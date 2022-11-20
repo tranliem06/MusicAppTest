@@ -2,13 +2,23 @@ import React from "react";
 import { memo } from "react";
 // import { useStateValue } from "../Context/StateProvider";
 import { useNavigate } from "react-router-dom";
+import { actionType } from "../Context/reducer";
+import { useStateValue } from "../Context/StateProvider";
 
 const Section = ({ data }) => {
-  // const [{}, dispatch] = useStateValue();
+  const [{ isPlayListZing }, dispatch] = useStateValue();
   const navigate = useNavigate();
 
   return (
-    <div className="mt-12 px-[59px] flex flex-col gap-5">
+    <div
+      className="mt-12 px-[59px] flex flex-col gap-5"
+      onClick={() => {
+        dispatch({
+          type: actionType.SET_PLAYLIST_FROM_ZING,
+          isPlayListZing: false,
+        });
+      }}
+    >
       <div className="flex items-center justify-between">
         <h3 className="text-5 font-bold text-[#4285f4]">{data?.title}</h3>
         <span className="text-xs">All</span>

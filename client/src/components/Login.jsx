@@ -12,9 +12,13 @@ const Login = ({ setAuth }) => {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, isLoadingHome }, dispatch] = useStateValue();
 
   const loginWithGoogle = async () => {
+    // dispatch({
+    //   type: actionType.LOADING_HOME,
+    //   isLoadingHome: false,
+    // });
     await signInWithPopup(firebaseAuth, provider).then((userCred) => {
       if (userCred) {
         setAuth(true);
