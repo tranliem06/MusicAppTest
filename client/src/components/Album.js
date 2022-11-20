@@ -4,11 +4,16 @@ import { GetDetailPlaylist } from "../api";
 import moment from "moment";
 import { Scrollbars } from "react-custom-scrollbars-2";
 
-import { Lists } from "../components";
+import { Lists, Loading2 } from "../components";
+import { actionType } from "../Context/reducer";
+import { useStateValue } from "../Context/StateProvider";
 
 const Album = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { title, pid } = useParams();
-  console.log({ title, pid });
+  // console.log({ title, pid });
+
+  const [{ curPlaylistZing }, dispatch] = useStateValue();
 
   const [playlistData, setPlaylistData] = useState({});
   useEffect(() => {
@@ -18,6 +23,10 @@ const Album = () => {
       //   console.log(response.data);
       if (response?.data.err === 0) {
         setPlaylistData(response.data?.data);
+        dispatch({
+          type: actionType.SET_PLAYLIST_ZING,
+          curPlaylistZing: response?.data?.data?.song?.items,
+        });
       }
     };
 
@@ -26,7 +35,10 @@ const Album = () => {
 
   //   console.log(playlistData.song.items);
   return (
-    <div className="flex gap-8 w-full h-full px-[59px] pt-5">
+    <div className="flex relative gap-8 w-full h-full px-[59px] pt-5">
+      <div className="absolute top-0 bottom-0 left-0 right-0 z-50 bg-overlay-30">
+        {/* <Loading2 /> */}
+      </div>
       <div className="flex-none w-1/4 border border-red-500 flex flex-col items-center gap-2">
         <img
           src={playlistData?.thumbnailM}

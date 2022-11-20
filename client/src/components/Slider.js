@@ -11,7 +11,7 @@ const Slider = () => {
   // const { banner } = useSelector((state) => state.app);
   const navigate = useNavigate();
 
-  const [{ banner, currentSongId }, dispatch] = useStateValue();
+  const [{ banner, isPlayListZing }, dispatch] = useStateValue();
 
   // console.log(banner);
 
@@ -87,17 +87,21 @@ const Slider = () => {
   });
 
   const handleClickBanner = (item) => {
-    console.log(item);
-    console.log("hello");
+    // console.log(item);
+    // console.log("hello");
+    dispatch({
+      type: actionType.SET_PLAYLIST_FROM_ZING,
+      isPlayListZing: false,
+    });
     if (item?.type === 1) {
       dispatch({
         type: actionType.SET_CUR_SONG_ID,
         curSongId: item.encodeId,
       });
     } else if (item?.type === 4) {
-      console.log(item);
+      // console.log(item);
       const albumPath = item?.link?.split(".")[0];
-      console.log(albumPath);
+      // console.log(albumPath);
       navigate(albumPath);
     }
   };

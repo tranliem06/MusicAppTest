@@ -8,7 +8,13 @@ const { BsMusicNoteBeamed } = icons;
 
 const List = ({ songData }) => {
   const [
-    { isSongZingPlaying, isSongPlaying, miniPlayer, isPlayListAllSong },
+    {
+      isSongZingPlaying,
+      isSongPlaying,
+      miniPlayer,
+      isPlayListAllSong,
+      isPlayListZing,
+    },
     dispatch,
   ] = useStateValue();
 
@@ -20,6 +26,10 @@ const List = ({ songData }) => {
         dispatch({
           type: actionType.SET_PLAYLIST_ALL_SONG,
           isPlayListAllSong: false,
+        });
+        dispatch({
+          type: actionType.SET_PLAYLIST_FROM_ZING,
+          isPlayListZing: true,
         });
         dispatch({
           type: actionType.SET_SONG_PLAYING,

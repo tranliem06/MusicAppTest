@@ -13,10 +13,21 @@ export const initialState = {
   isSongPlaying: false,
   miniPlayer: false,
 
-  //**TEST */
+  //**TEST FOR ZINGMP3 */
   banner: [],
   curSongId: null,
+  curPlaylistZing: null,
   isSongZingPlaying: false,
+
+  isCurrentSongVip: false,
+
+  today: {},
+  newSongEveryday: {},
+  top100: {},
+  xone: {},
+
+  //** STOP PLAYLIST ALL SONG */
   isPlayListAllSong: false,
+  isPlayListZing: false,
   //
 };

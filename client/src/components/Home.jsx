@@ -12,6 +12,7 @@ import {
   SongCard,
   Header,
   Filter,
+  Section,
 } from "../components";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
@@ -23,6 +24,10 @@ const Home = () => {
       isSongPlaying,
       song,
       allSongs,
+      today,
+      newSongEveryday,
+      top100,
+      xone,
       artistFilter,
       filterTerm,
       albumFilter,
@@ -119,11 +124,29 @@ const Home = () => {
           <div>
             <Slider />
           </div>
-          <div className="w-full h-auto flex items-center justify-evenly gap-4 flex-wrap p-4">
-            {/* <HomeSongContainer musics={filteredSongs ? filteredSongs : allSongs} /> */}
-            <HomeSongContainer musics={allSongs} />
+          <div>
+            <Section data={today} />
           </div>
-          <div>{/* <img src={allSongs[0].imageURL} alt="test" /> */}</div>
+          <div>
+            <Section data={top100} />
+          </div>
+          <div>
+            <Section data={newSongEveryday} />
+          </div>
+          <div>
+            <Section data={xone} />
+          </div>
+          <div className="w-full h-auto flex flex-col p-[59px] gap-4">
+            <div>
+              <span className="text-5 font-bold text-[#4285f4]">
+                Recently Upload
+              </span>
+            </div>
+            {/* <HomeSongContainer musics={filteredSongs ? filteredSongs : allSongs} /> */}
+            <div className="flex items-center justify-evenly gap-4 flex-wrap">
+              <HomeSongContainer musics={allSongs} />
+            </div>
+          </div>
         </div>
       </div>
     </Scrollbars>
@@ -131,10 +154,30 @@ const Home = () => {
 };
 
 export const HomeSongContainer = ({ musics }) => {
-  const [{ isSongPlaying, song, isSongZingPlaying }, dispatch] =
-    useStateValue();
+  const [
+    {
+      isSongPlaying,
+      song,
+      isSongZingPlaying,
+      isPlayListZing,
+      isPlayListAllSong,
+    },
+    dispatch,
+  ] = useStateValue();
 
   const addSongToContext = (index) => {
+    if (isPlayListZing) {
+      dispatch({
+        type: actionType.SET_PLAYLIST_FROM_ZING,
+        isPlayListZing: false,
+      });
+    }
+    if (isPlayListZing) {
+      dispatch({
+        type: actionType.SET_PLAYLIST_ALL_SONG,
+        isPlayListAllSong: true,
+      });
+    }
     if (isSongZingPlaying) {
       dispatch({
         type: actionType.PLAY_SONG_FROM_ZING,

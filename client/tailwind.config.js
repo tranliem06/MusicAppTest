@@ -43,6 +43,9 @@ module.exports = {
         xl: "1280px",
         "2xl": "1536px",
       },
+      backgroundColor: {
+        "overlay-30": "rgba(0,0,0,0.3)",
+      },
       colors: {
         headingColor: "#2e2e2e",
         textColor: "#515151",

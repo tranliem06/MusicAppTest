@@ -17,11 +17,16 @@ export const actionType = {
   GET_HOME: "GET_HOME",
   SET_CUR_SONG_ID: "SET_CUR_SONG_ID",
   PLAY_SONG_FROM_ZING: "PLAY_SONG_FROM_ZING",
+
   SET_PLAYLIST_ALL_SONG: "SET_PLAYLIST_ALL_SONG",
+  SET_PLAYLIST_FROM_ZING: "SET_PLAYLIST_FROM_ZING",
+
+  SET_PLAYLIST_ZING: "SET_PLAYLIST_ZING",
+  SET_CURRENT_VIP: "SET_CURRENT_VIP",
 };
 
 const reducer = (state, action) => {
-  console.log(action);
+  // console.log(action);
 
   switch (action.type) {
     case actionType.SET_USER:
@@ -113,8 +118,18 @@ const reducer = (state, action) => {
       return {
         ...state,
         banner:
-          action.homeData?.find((item) => item.sectionType === "banner")
+          action.homeData?.find((item) => item.sectionId === "hSlider")
             ?.items || null,
+        today:
+          action.homeData?.find((item) => item.sectionId === "hAutoTheme1") ||
+          null,
+        newSongEveryday:
+          action.homeData?.find((item) => item.sectionId === "hAutoTheme2") ||
+          null,
+        top100:
+          action.homeData?.find((item) => item.sectionId === "h100") || null,
+        xone:
+          action.homeData?.find((item) => item.sectionId === "hXone") || null,
       };
 
     case actionType.SET_CUR_SONG_ID:
@@ -132,6 +147,22 @@ const reducer = (state, action) => {
       return {
         ...state,
         isSongZingPlaying: action.isSongZingPlaying,
+      };
+    case actionType.SET_PLAYLIST_ZING:
+      return {
+        ...state,
+        curPlaylistZing: action.curPlaylistZing,
+      };
+    case actionType.SET_PLAYLIST_FROM_ZING:
+      return {
+        ...state,
+        isPlayListZing: action.isPlayListZing,
+      };
+
+    case actionType.SET_CURRENT_VIP:
+      return {
+        ...state,
+        isCurrentSongVip: action.isCurrentSongVip,
       };
 
     default:

@@ -29,7 +29,7 @@ const Header = () => {
   return (
     <header className="flex items-center justify-between w-full p[10px] md:py-2 md:px-6">
       <div className=" w-[20%] items-start">
-        <NavLink to={"/"} cla>
+        <NavLink to={"/"}>
           <div className="flex gap-2 items-center justify-start">
             <img src={Logo2} className="w-10" alt="" />
             <p className="text-[18px] text-blue-500 font-semibold">

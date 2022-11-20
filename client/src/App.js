@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   getAuth,
@@ -141,6 +143,19 @@ function App() {
           <Route path="/dashboard/*" element={<Dashboard />} />
           <Route path="/userProfile" element={<UserProfile />} />
         </Routes>
+
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </div>
     </AnimatePresence>
   );

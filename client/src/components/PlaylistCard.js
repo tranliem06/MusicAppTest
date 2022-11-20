@@ -46,6 +46,7 @@ const PlayListCard = () => {
               music?._id === song._id ? "bg-card" : "bg-transparent"
             }`}
             onClick={() => setCurrentPlaySong(index)}
+            key={song._id}
           >
             <div className="w-[20%]">
               <img

@@ -7,26 +7,31 @@ import { motion } from "framer-motion";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { actionType } from "../Context/reducer";
-import { MdPlaylistPlay } from "react-icons/md";
-import { getAllSongs, getDetailSong, getSong } from "../api";
+// import { MdPlaylistPlay } from "react-icons/md";
+import { getDetailSong, getSong } from "../api";
 import { RiPlayListFill } from "react-icons/ri";
-import { PlayListCard } from "./";
+// import { PlayListCard } from "./";
+import { toast } from "react-toastify";
+import { async } from "@firebase/util";
 
 const MusicPlayerZing = () => {
   // const [isPlayList, setIsPlayList] = useState(false);
   const [
     {
-      isSongPlaying,
-      miniPlayer,
-      isSongZingPlaying,
       curSongId,
-      isPlayListAllSong,
+      curPlaylistZing,
+      isSongZingPlaying,
+      miniPlayer,
+      isCurrentSongVip,
+      isPlayListZing,
     },
     dispatch,
   ] = useStateValue();
 
   const [songInfo, setSongInfo] = useState(null);
   const [source, setSource] = useState(null);
+
+  var a = new Audio();
 
   useEffect(() => {
     const fetchDetailSong = async () => {
@@ -35,7 +40,7 @@ const MusicPlayerZing = () => {
         getSong(curSongId),
       ]);
       console.log(res1);
-
+      console.log(res2);
       // console.log(response);
       if (res1.data.err === 0) {
         setSongInfo(res1.data.data);
@@ -71,19 +76,27 @@ const MusicPlayerZing = () => {
     }
   };
 
-  // const nextTrack = () => {
-  //   if (song > allSongs.length) {
-  //     dispatch({
-  //       type: actionType.SET_SONG,
-  //       song: 0,
-  //     });
-  //   } else {
-  //     dispatch({
-  //       type: actionType.SET_SONG,
-  //       song: song + 1,
-  //     });
-  //   }
-  // };
+  const nextTrack = () => {
+    let currentSongIndex;
+    curPlaylistZing?.forEach((item, index) => {
+      if (item.encodeId === curSongId) currentSongIndex = index;
+    });
+    dispatch({
+      type: actionType.SET_CUR_SONG_ID,
+      curSongId: curPlaylistZing[currentSongIndex + 1].encodeId,
+    });
+  };
+
+  const previousTrack = () => {
+    let currentSongIndex;
+    curPlaylistZing?.forEach((item, index) => {
+      if (item.encodeId === curSongId) currentSongIndex = index;
+    });
+    dispatch({
+      type: actionType.SET_CUR_SONG_ID,
+      curSongId: curPlaylistZing[currentSongIndex - 1].encodeId,
+    });
+  };
 
   // const previousTrack = () => {
   //   if (song === 0) {
@@ -136,11 +149,12 @@ const MusicPlayerZing = () => {
         <div className="w-[40%]">
           <AudioPlayer
             src={`http://api.mp3.zing.vn/api/streaming/audio/${curSongId}/320`}
-            onPlay={() => console.log("is playing")}
+            // onPlay={() => console.log("is playing")}
             autoPlay={true}
             showSkipControls={true}
-            // onClickNext={nextTrack}
-            // onClickPrevious={previousTrack}
+            onClickNext={nextTrack}
+            onClickPrevious={previousTrack}
+            onEnded={nextTrack}
           />
         </div>
         <div className="w-[30%] pr-10">
@@ -153,12 +167,12 @@ const MusicPlayerZing = () => {
             </motion.i>
             <motion.i
               whileTap={{ scale: 0.8 }}
-              // onClick={() => {
-              //   dispatch({
-              //     type: actionType.SET_PLAYLIST_ALL_SONG,
-              //     isPlayListAllSong: !isPlayListAllSong ? true : false,
-              //   });
-              // }}
+              onClick={() => {
+                dispatch({
+                  type: actionType.SET_PLAYLIST_FROM_ZING,
+                  isPlayListZing: !isPlayListZing ? true : false,
+                });
+              }}
             >
               <RiPlayListFill className="text-textColor hover:text-headingColor text-3xl cursor-pointer" />
             </motion.i>

@@ -2,11 +2,13 @@ import React, { memo } from "react";
 import { List } from "../components";
 import icons from "../utils/icons";
 import moment from "moment";
+import { useStateValue } from "../Context/StateProvider";
 
 const { BsDot } = icons;
 
-const Lists = ({ songs, totalDuration }) => {
+const Lists = ({ totalDuration }) => {
   // console.log({ songs, totalDuration });
+  const [{ curPlaylistZing }, dispatch] = useStateValue();
 
   return (
     <div className=" w-full flex flex-col text-xs text-gray-600">
@@ -23,13 +25,13 @@ const Lists = ({ songs, totalDuration }) => {
       </div>
 
       <div className="flex flex-col">
-        {songs?.map((item) => (
+        {curPlaylistZing?.map((item) => (
           <List key={item.encodeId} songData={item} />
         ))}
       </div>
 
       <span className="flex items-center gap-2 px-4 py-[10px] border-t border-blue-500">
-        <span>{`${songs?.length} songs`}</span>
+        <span>{`${curPlaylistZing?.length} songs`}</span>
         <BsDot size={24} />
         <span>{moment.utc(totalDuration * 1000).format("HH:mm:ss")}</span>
       </span>
