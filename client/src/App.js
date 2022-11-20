@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 
 import { app } from "./config/firebase.config";
-import { getAllSongs, validateUser } from "./api";
+import { getAllAlbums, getAllArtist, getAllSongs, validateUser } from "./api";
 
 import {
   Dashboard,
@@ -31,7 +31,16 @@ function App() {
   const firebaseAuth = getAuth(app);
   const navigate = useNavigate();
   const [
-    { user, allSongs, song, isSongPlaying, miniPlayer, banner },
+    {
+      user,
+      allSongs,
+      artists,
+      allAlbums,
+      song,
+      isSongPlaying,
+      miniPlayer,
+      banner,
+    },
     dispatch,
   ] = useStateValue();
   const [isLoading, setIsLoading] = useState(false);
@@ -40,6 +49,19 @@ function App() {
     false || window.localStorage.getItem("auth") === "true"
   );
 
+  useEffect(() => {
+    if (!artists) {
+      getAllArtist().then((data) => {
+        dispatch({ type: actionType.SET_ARTISTS, artists: data.data });
+      });
+    }
+
+    if (!allAlbums) {
+      getAllAlbums().then((data) => {
+        dispatch({ type: actionType.SET_ALL_ALBUMNS, allAlbums: data.data });
+      });
+    }
+  }, []);
   useEffect(() => {
     setIsLoading(true);
     firebaseAuth.onAuthStateChanged((userCred) => {
@@ -114,21 +136,11 @@ function App() {
           <Route path="/*" element={<Public />}>
             <Route path="" element={<Home />} />
             <Route path="album/:title/:pid" element={<Album />} />
+            <Route path="playlist/:title/:pid" element={<Album />} />
           </Route>
           <Route path="/dashboard/*" element={<Dashboard />} />
           <Route path="/userProfile" element={<UserProfile />} />
         </Routes>
-
-        {isSongPlaying && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            className={`fixed min-w-[700px] h-26  inset-x-0 bottom-0  bg-white drop-shadow-xl backdrop-blur-md flex items-center justify-center`}
-          >
-            <MusicPlayer />
-          </motion.div>
-        )}
       </div>
     </AnimatePresence>
   );

@@ -1,13 +1,18 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-
-import { Header, Player, SidebarLeft, SidebarRight } from "../components";
-
-import { Scrollbars } from "react-custom-scrollbars-2";
-// import { useStateValue } from "../Context/StateProvider";
+import {
+  Header,
+  Player,
+  SidebarLeft,
+  SidebarRight,
+  MusicPlayer,
+  MusicPlayerZing,
+} from "../components";
+import { useStateValue } from "../Context/StateProvider";
+import { motion } from "framer-motion";
 
 const Public = () => {
-  //   const [{ isSongPlaying }, dispatch] = useStateValue();
+  const [{ isSongPlaying, isSongZingPlaying }, dispatch] = useStateValue();
 
   return (
     <div className=" w-full flex flex-col min-h-screen ">
@@ -15,9 +20,6 @@ const Public = () => {
         <div className="w-full flex-none border border-blue-500">
           <Header />
         </div>
-        {/* <div className="flex-auto border border-red-500">
-          <Outlet />
-        </div> */}
 
         <div className="w-full h-full flex flex-auto">
           <div className="w-[240px] flex-none border border-blue-500">
@@ -37,6 +39,19 @@ const Public = () => {
       {/* <div className="flex-none h-[90px] w-full fixed bottom-0 left-0 right-0">
         <Player />
       </div> */}
+      {/* <div className="flex-none fixed bottom-0 left-0 right-0"> */}
+      {isSongPlaying && (
+        // <motion.div
+        //   initial={{ opacity: 0, y: 50 }}
+        //   animate={{ opacity: 1, y: 0 }}
+        //   exit={{ opacity: 0, y: 50 }}
+        //   className={`fixed min-w-[700px] h-[96px]  inset-x-0 bottom-0  bg-white drop-shadow-xl backdrop-blur-md flex items-center justify-center`}
+        // >
+        <MusicPlayer />
+        // </motion.div>
+      )}
+      {isSongZingPlaying && <MusicPlayerZing />}
+      {/* </div> */}
     </div>
   );
 };

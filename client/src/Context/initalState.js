@@ -16,7 +16,7 @@ export const initialState = {
   //**TEST */
   banner: [],
   curSongId: null,
-  isPlaying: false,
+  isSongZingPlaying: false,
   isPlayListAllSong: false,
   //
 };

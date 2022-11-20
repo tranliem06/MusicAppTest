@@ -14,6 +14,8 @@ import {
   Filter,
 } from "../components";
 
+import { Scrollbars } from "react-custom-scrollbars-2";
+
 const Home = () => {
   const [
     {
@@ -25,11 +27,12 @@ const Home = () => {
       filterTerm,
       albumFilter,
       languageFilter,
+      isSongZingPlaying,
     },
     dispatch,
   ] = useStateValue();
 
-  const [filteredSongs, setFilteredSongs] = useState(null);
+  // const [filteredSongs, setFilteredSongs] = useState(null);
 
   useEffect(() => {
     if (!allSongs) {
@@ -42,95 +45,102 @@ const Home = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (searchTerm.length > 0) {
-      const filtered = allSongs.filter(
-        (data) =>
-          data.artist.toLowerCase().includes(searchTerm) ||
-          data.language.toLowerCase().includes(searchTerm) ||
-          data.name.toLowerCase().includes(searchTerm) ||
-          data.artist.includes(artistFilter)
-      );
-      setFilteredSongs(filtered);
-    } else {
-      setFilteredSongs(null);
-    }
-  }, [searchTerm]);
+  // useEffect(() => {
+  //   if (searchTerm.length > 0) {
+  //     const filtered = allSongs.filter(
+  //       (data) =>
+  //         data.artist.toLowerCase().includes(searchTerm) ||
+  //         data.language.toLowerCase().includes(searchTerm) ||
+  //         data.name.toLowerCase().includes(searchTerm) ||
+  //         data.artist.includes(artistFilter)
+  //     );
+  //     setFilteredSongs(filtered);
+  //   } else {
+  //     setFilteredSongs(null);
+  //   }
+  // }, [searchTerm]);
 
-  useEffect(() => {
-    const filtered = allSongs?.filter((data) => data.artist === artistFilter);
-    if (filtered) {
-      setFilteredSongs(filtered);
-    } else {
-      setFilteredSongs(null);
-    }
-  }, [artistFilter]);
+  // useEffect(() => {
+  //   const filtered = allSongs?.filter((data) => data.artist === artistFilter);
+  //   if (filtered) {
+  //     setFilteredSongs(filtered);
+  //   } else {
+  //     setFilteredSongs(null);
+  //   }
+  // }, [artistFilter]);
 
-  useEffect(() => {
-    const filtered = allSongs?.filter(
-      (data) => data.category.toLowerCase() === filterTerm
-    );
-    if (filtered) {
-      setFilteredSongs(filtered);
-    } else {
-      setFilteredSongs(null);
-    }
-  }, [filterTerm]);
+  // useEffect(() => {
+  //   const filtered = allSongs?.filter(
+  //     (data) => data.category.toLowerCase() === filterTerm
+  //   );
+  //   if (filtered) {
+  //     setFilteredSongs(filtered);
+  //   } else {
+  //     setFilteredSongs(null);
+  //   }
+  // }, [filterTerm]);
 
-  useEffect(() => {
-    const filtered = allSongs?.filter((data) => data.album === albumFilter);
-    if (filtered) {
-      setFilteredSongs(filtered);
-    } else {
-      setFilteredSongs(null);
-    }
-  }, [albumFilter]);
+  // useEffect(() => {
+  //   const filtered = allSongs?.filter((data) => data.album === albumFilter);
+  //   if (filtered) {
+  //     setFilteredSongs(filtered);
+  //   } else {
+  //     setFilteredSongs(null);
+  //   }
+  // }, [albumFilter]);
 
-  useEffect(() => {
-    const filtered = allSongs?.filter(
-      (data) => data.language === languageFilter
-    );
-    if (filtered) {
-      setFilteredSongs(filtered);
-    } else {
-      setFilteredSongs(null);
-    }
-  }, [languageFilter]);
+  // useEffect(() => {
+  //   const filtered = allSongs?.filter(
+  //     (data) => data.language === languageFilter
+  //   );
+  //   if (filtered) {
+  //     setFilteredSongs(filtered);
+  //   } else {
+  //     setFilteredSongs(null);
+  //   }
+  // }, [languageFilter]);
 
   return (
-    <div className="w-full h-auto flex flex-col items-center justify-center bg-primary">
-      {/* <Header /> */}
-      <SearchBar />
+    <Scrollbars style={{ width: "100%", height: "100%" }}>
+      <div className="w-full h-auto flex flex-col items-center justify-center bg-primary mb-10">
+        {/* <Header /> */}
+        {/* <SearchBar /> */}
 
-      {searchTerm.length > 0 && (
-        <p className="my-4 text-base text-textColor">
-          Searched for :
-          <span className="text-xl text-cartBg font-semibold">
-            {searchTerm}
-          </span>
-        </p>
-      )}
+        {/* {searchTerm.length > 0 && (
+          <p className="my-4 text-base text-textColor">
+            Searched for :
+            <span className="text-xl text-cartBg font-semibold">
+              {searchTerm}
+            </span>
+          </p>
+        )} */}
 
-      <Filter setFilteredSongs={setFilteredSongs} />
-      <div>
-        <Slider />
+        <div>
+          <div>
+            <Slider />
+          </div>
+          <div className="w-full h-auto flex items-center justify-evenly gap-4 flex-wrap p-4">
+            {/* <HomeSongContainer musics={filteredSongs ? filteredSongs : allSongs} /> */}
+            <HomeSongContainer musics={allSongs} />
+          </div>
+          <div>{/* <img src={allSongs[0].imageURL} alt="test" /> */}</div>
+        </div>
       </div>
-
-      <div className="w-full h-auto flex items-center justify-evenly gap-4 flex-wrap p-4">
-        {/* <HomeSongContainer musics={filteredSongs ? filteredSongs : allSongs} /> */}
-        <HomeSongContainer musics={allSongs} />
-      </div>
-      {/* <div className="flex-none h-[90px] w-full">
-        <Player />
-      </div> */}
-    </div>
+    </Scrollbars>
   );
 };
 
 export const HomeSongContainer = ({ musics }) => {
-  const [{ isSongPlaying, song }, dispatch] = useStateValue();
+  const [{ isSongPlaying, song, isSongZingPlaying }, dispatch] =
+    useStateValue();
 
   const addSongToContext = (index) => {
+    if (isSongZingPlaying) {
+      dispatch({
+        type: actionType.PLAY_SONG_FROM_ZING,
+        isSongZingPlaying: false,
+      });
+    }
     if (!isSongPlaying) {
       dispatch({
         type: actionType.SET_SONG_PLAYING,

@@ -5,6 +5,7 @@ import {
   MdSkipPrevious,
   MdShuffle,
   MdRepeat,
+  MdOutlineMusicNote,
 } from "react-icons/md";
 import { HiOutlineChartPie } from "react-icons/hi";
 // import { TbChartArcs } from "react-icons/tb";
@@ -20,8 +21,10 @@ import {
   BsPlayFill,
   BsPauseFill,
   BsMusicNoteBeamed,
+  BsDot,
 } from "react-icons/bs";
 // import { CiRepeat, CiShuffle } from "react-icons/ci";
+import { BiLineChartDown } from "react-icons/bi";
 
 const icons = {
   MdOutlineLibraryMusic,
@@ -41,6 +44,9 @@ const icons = {
   BsPlayFill,
   BsPauseFill,
   BsMusicNoteBeamed,
+  BiLineChartDown,
+  MdOutlineMusicNote,
+  BsDot,
 };
 
 export default icons;

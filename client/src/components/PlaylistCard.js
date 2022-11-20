@@ -39,28 +39,35 @@ const PlayListCard = () => {
       {allSongs.length > 0 ? (
         allSongs.map((music, index) => (
           <motion.div
-            initial={{ opacity: 0, translateX: -50 }}
+            initial={{ opacity: 0, translateX: 150 }}
             animate={{ opacity: 1, translateX: 0 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
-            className={`group w-full p-4 hover:bg-card flex gap-3 items-center cursor-pointer ${
+            className={`group w-full p-2 hover:bg-card flex gap-3 items-center cursor-pointer ${
               music?._id === song._id ? "bg-card" : "bg-transparent"
             }`}
             onClick={() => setCurrentPlaySong(index)}
           >
-            <div className="flex items-start flex-col">
-              <p className="text-[14px] text-headingColor font-semibold">
+            <div className="w-[20%]">
+              <img
+                src={music?.imageURL}
+                alt="img-cover"
+                className="w-12 h-12 object-cover rounded-md"
+              />
+            </div>
+            <div className="w-auto flex flex-col">
+              <p className="text-[12px] text-headingColor font-semibold">
                 {`${
-                  music?.name.length > 30
-                    ? music?.name.slice(0, 30)
+                  music?.name.length > 25
+                    ? `${music?.name.slice(0, 25)}...`
                     : music?.name
-                }...`}
+                }`}
                 {/* <span className="text-base">({music?.album})</span> */}
               </p>
-              <p className="text-[12px] text-textColor">
+              <p className="text-[10px] text-textColor">
                 {music?.artist}
                 {/* <span className="text-sm text-textColor font-semibold">
-                  ({music?.category})
-                </span> */}
+                    ({music?.category})
+                  </span> */}
               </p>
             </div>
           </motion.div>

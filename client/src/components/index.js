@@ -30,3 +30,4 @@ export { default as Lists } from "./Lists";
 export { default as SidebarLeft } from "./SidebarLeft";
 export { default as SidebarRight } from "./SidebarRight";
 export { default as PlayListCard } from "./PlaylistCard";
+export { default as MusicPlayerZing } from "./MusicPlayerZing";

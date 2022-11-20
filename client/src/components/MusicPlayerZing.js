@@ -8,22 +8,51 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { actionType } from "../Context/reducer";
 import { MdPlaylistPlay } from "react-icons/md";
-import { getAllSongs } from "../api";
+import { getAllSongs, getDetailSong, getSong } from "../api";
 import { RiPlayListFill } from "react-icons/ri";
 import { PlayListCard } from "./";
 
-const MusicPlayer = () => {
+const MusicPlayerZing = () => {
   // const [isPlayList, setIsPlayList] = useState(false);
   const [
-    { allSongs, song, isSongPlaying, miniPlayer, isPlayListAllSong },
+    {
+      isSongPlaying,
+      miniPlayer,
+      isSongZingPlaying,
+      curSongId,
+      isPlayListAllSong,
+    },
     dispatch,
   ] = useStateValue();
 
+  const [songInfo, setSongInfo] = useState(null);
+  const [source, setSource] = useState(null);
+
+  useEffect(() => {
+    const fetchDetailSong = async () => {
+      const [res1, res2] = await Promise.all([
+        getDetailSong(curSongId),
+        getSong(curSongId),
+      ]);
+      console.log(res1);
+
+      // console.log(response);
+      if (res1.data.err === 0) {
+        setSongInfo(res1.data.data);
+      }
+      if (res2.data.err === 0) {
+        setSource(res2.data.data["128"]);
+      }
+    };
+
+    fetchDetailSong();
+  }, [curSongId]);
+
   const closeMusicPlayer = () => {
-    if (isSongPlaying) {
+    if (isSongZingPlaying) {
       dispatch({
-        type: actionType.SET_SONG_PLAYING,
-        isSongPlaying: false,
+        type: actionType.PLAY_SONG_FROM_ZING,
+        isSongZingPlaying: false,
       });
     }
   };
@@ -42,42 +71,42 @@ const MusicPlayer = () => {
     }
   };
 
-  const nextTrack = () => {
-    if (song > allSongs.length) {
-      dispatch({
-        type: actionType.SET_SONG,
-        song: 0,
-      });
-    } else {
-      dispatch({
-        type: actionType.SET_SONG,
-        song: song + 1,
-      });
-    }
-  };
+  // const nextTrack = () => {
+  //   if (song > allSongs.length) {
+  //     dispatch({
+  //       type: actionType.SET_SONG,
+  //       song: 0,
+  //     });
+  //   } else {
+  //     dispatch({
+  //       type: actionType.SET_SONG,
+  //       song: song + 1,
+  //     });
+  //   }
+  // };
 
-  const previousTrack = () => {
-    if (song === 0) {
-      dispatch({
-        type: actionType.SET_SONG,
-        song: 0,
-      });
-    } else {
-      dispatch({
-        type: actionType.SET_SONG,
-        song: song - 1,
-      });
-    }
-  };
+  // const previousTrack = () => {
+  //   if (song === 0) {
+  //     dispatch({
+  //       type: actionType.SET_SONG,
+  //       song: 0,
+  //     });
+  //   } else {
+  //     dispatch({
+  //       type: actionType.SET_SONG,
+  //       song: song - 1,
+  //     });
+  //   }
+  // };
 
-  useEffect(() => {
-    if (song > allSongs.length) {
-      dispatch({
-        type: actionType.SET_SONG,
-        song: 0,
-      });
-    }
-  }, [song]);
+  // useEffect(() => {
+  //   if (song > allSongs.length) {
+  //     dispatch({
+  //       type: actionType.SET_SONG,
+  //       song: 0,
+  //     });
+  //   }
+  // }, [song]);
 
   return (
     <div className="w-full h-[96px] full flex items-center gap-3 overflow-hidden">
@@ -88,31 +117,30 @@ const MusicPlayer = () => {
       >
         <div className="w-[30%] flex flex-auto gap-3 items-center">
           <img
-            src={allSongs[song]?.imageURL}
+            src={songInfo?.thumbnail}
             className="w-16 h-16 object-cover rounded-md"
             alt=""
           />
           <div className="flex items-start flex-col">
             <p className="text-[14px] text-gray-700 font-semibold">
               {`${
-                allSongs[song]?.name.length > 30
-                  ? `${allSongs[song]?.name.slice(0, 30)}...`
-                  : allSongs[song]?.name
+                songInfo?.title.length > 30
+                  ? `${songInfo?.title?.slice(0, 30)}...`
+                  : songInfo?.title
               }`}
               {/* <span className="text-base">({allSongs[song]?.album})</span> */}
             </p>
-            <p className="text-textColor">{allSongs[song]?.artist} </p>
+            <p className="text-textColor">{songInfo?.artistsNames} </p>
           </div>
         </div>
         <div className="w-[40%]">
           <AudioPlayer
-            src={allSongs[song]?.songURL}
+            src={`http://api.mp3.zing.vn/api/streaming/audio/${curSongId}/320`}
             onPlay={() => console.log("is playing")}
             autoPlay={true}
             showSkipControls={true}
-            onClickNext={nextTrack}
-            onClickPrevious={previousTrack}
-            onEnded={nextTrack}
+            // onClickNext={nextTrack}
+            // onClickPrevious={previousTrack}
           />
         </div>
         <div className="w-[30%] pr-10">
@@ -125,12 +153,12 @@ const MusicPlayer = () => {
             </motion.i>
             <motion.i
               whileTap={{ scale: 0.8 }}
-              onClick={() => {
-                dispatch({
-                  type: actionType.SET_PLAYLIST_ALL_SONG,
-                  isPlayListAllSong: !isPlayListAllSong ? true : false,
-                });
-              }}
+              // onClick={() => {
+              //   dispatch({
+              //     type: actionType.SET_PLAYLIST_ALL_SONG,
+              //     isPlayListAllSong: !isPlayListAllSong ? true : false,
+              //   });
+              // }}
             >
               <RiPlayListFill className="text-textColor hover:text-headingColor text-3xl cursor-pointer" />
             </motion.i>
@@ -139,24 +167,20 @@ const MusicPlayer = () => {
       </div>
 
       {miniPlayer && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.6 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="fixed right-2 bottom-2 "
-        >
+        <div className="fixed right-2 bottom-2 ">
           <div className="w-40 h-40 rounded-full flex items-center justify-center  relative ">
-            <div className="absolute inset-0 rounded-full bg-[#4285f4] animate-pulse"></div>
+            <div className="absolute inset-0 rounded-full bg-[#4285f4] blur-xl animate-pulse"></div>
             <img
               onClick={togglePlayer}
-              src={allSongs[song]?.imageURL}
+              src={songInfo?.thumbnail}
               className="z-50 w-32 h-32 rounded-full object-cover cursor-pointer"
               alt=""
             />
           </div>
-        </motion.div>
+        </div>
       )}
     </div>
   );
 };
 
-export default MusicPlayer;
+export default MusicPlayerZing;

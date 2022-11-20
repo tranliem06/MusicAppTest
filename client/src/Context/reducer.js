@@ -16,7 +16,7 @@ export const actionType = {
   //************************** */
   GET_HOME: "GET_HOME",
   SET_CUR_SONG_ID: "SET_CUR_SONG_ID",
-  PLAY: "PLAY",
+  PLAY_SONG_FROM_ZING: "PLAY_SONG_FROM_ZING",
   SET_PLAYLIST_ALL_SONG: "SET_PLAYLIST_ALL_SONG",
 };
 
@@ -101,11 +101,6 @@ const reducer = (state, action) => {
         ...state,
         miniPlayer: action.miniPlayer,
       };
-    case actionType.PLAY:
-      return {
-        ...state,
-        isPlaying: action.isPlaying,
-      };
 
     //*code này đã đc chèn thêm chú ý :()
     // case actionType.GET_HOME:
@@ -132,6 +127,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         isPlayListAllSong: action.isPlayListAllSong,
+      };
+    case actionType.PLAY_SONG_FROM_ZING:
+      return {
+        ...state,
+        isSongZingPlaying: action.isSongZingPlaying,
       };
 
     default:
