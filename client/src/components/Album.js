@@ -51,7 +51,7 @@ const Album = () => {
           {/* <Loading /> */}
         </div>
       )}
-      <div className="flex-none w-1/4 border border-red-500 flex flex-col items-center gap-2">
+      <div className="flex-none w-1/4 flex flex-col items-center gap-2">
         <img
           src={playlistData?.thumbnailM}
           alt="thumbnail"
@@ -79,7 +79,7 @@ const Album = () => {
       </div>
 
       <Scrollbars style={{ width: "100%", height: "100%" }}>
-        <div className="flex-auto p-4 mb-40  border border-blue-500">
+        <div className="flex-auto p-4 mb-40 ">
           <span className="text-sm">
             <span className="text-gray-600">Intro: </span>
             <span>{playlistData?.sortDescription}</span>

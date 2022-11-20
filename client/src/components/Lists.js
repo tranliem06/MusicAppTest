@@ -12,7 +12,7 @@ const Lists = ({ totalDuration }) => {
 
   return (
     <div className=" w-full flex flex-col text-xs text-gray-600">
-      <div className="border border-green-500 flex   p-[10px] font-semibold uppercase">
+      <div className=" flex   p-[10px] font-semibold uppercase">
         <div className="w-[50%]">
           <span>Title</span>
         </div>

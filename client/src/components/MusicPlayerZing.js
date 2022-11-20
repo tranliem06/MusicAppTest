@@ -122,7 +122,7 @@ const MusicPlayerZing = () => {
   // }, [song]);
 
   return (
-    <div className="w-full h-[96px] full flex items-center gap-3 overflow-hidden">
+    <div className="w-full h-[96px] full flex items-center gap-3 overflow-hidden bg-gray-50 z-50">
       <div
         className={`w-full full items-center gap-3 p-4  ${
           miniPlayer ? "hidden" : "flex relative"

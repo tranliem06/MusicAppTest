@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 // import { useSelector } from "react-redux";
 import { useStateValue } from "../Context/StateProvider";
 import { SongItem } from "../components";
+import { actionType } from "../Context/reducer";
 const NewRelease = () => {
   //   const { newRelease } = useSelector((state) => state.app);
-  const [{ newRelease }, dispatch] = useStateValue();
+  const [{ newRelease, curPlaylistZing }, dispatch] = useStateValue();
   const [isActived, setIsActived] = useState(0);
   const [songs, setSongs] = useState([]);
 
@@ -33,12 +34,14 @@ const NewRelease = () => {
         </button>
         <button
           type="button"
-          onClick={() => setIsActived(1)}
+          onClick={() => {
+            setIsActived(1);
+          }}
           className={`py-1 px-4 rounded-l-full rounded-r-full border border-gray-400 bg-transparent ${
             isActived === 1 && "bg-[#4285f4]  text-white"
           }`}
         >
-          US/UK
+          OTHERS
         </button>
       </div>
       <div className="flex flex-wrap w-full justify-between">
@@ -50,6 +53,8 @@ const NewRelease = () => {
             artists={item.artistsNames}
             releaseDate={item.releaseDate}
             sid={item.encodeId}
+            key={item.encodeId}
+            state={isActived}
           />
           //   </div>
         ))}

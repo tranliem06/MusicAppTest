@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { LoginBg } from "../assets/video";
+// import { LoginBg } from "../assets/video";
+import { Bg1, Bg2, Bg3, Gif1, Logo2 } from "../assets/img";
 import { FcGoogle } from "react-icons/fc";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from "../config/firebase.config";
@@ -7,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { validateUser } from "../api";
 import { actionType } from "../Context/reducer";
 import { useStateValue } from "../Context/StateProvider";
+
+import { ImGoogle } from "react-icons/im";
 
 const Login = ({ setAuth }) => {
   const firebaseAuth = getAuth(app);
@@ -55,23 +58,36 @@ const Login = ({ setAuth }) => {
   }, []);
 
   return (
-    <div className="relative w-screen h-screen">
-      <video
-        src={LoginBg}
-        type="video/mp4"
-        autoPlay
-        muted
-        loop
-        className="w-full h-full object-cover"
-      ></video>
-      <div className="absolute inset-0 bg-darkOverlay flex items-center justify-center p-4">
-        <div className="w-full md:w-375 p-4 bg-lightOverlay shadow-2xl rounded-md backdrop-blur-md flex flex-col items-center justify-center">
+    <div className="relative w-screen h-screen bg-gray-100">
+      {/* <div className="w-full h-full object-cover">
+        <img src={Bg2} alt="bg" />
+      </div> */}
+      <div className="absolute inset-0  flex items-center justify-center p-4">
+        <div className="w-full md:w-375 p-4 bg-gray-100 rounded-md backdrop-blur-md flex flex-col items-center justify-center gap-4">
+          <div className="flex gap-2 items-center justify-start">
+            <img src={Logo2} className="w-10" alt="" />
+            <p className="text-[18px] text-blue-500 font-semibold">
+              BLUEPLAYER
+            </p>
+          </div>
+          <div className="w-[500px] flex items-center justify-center">
+            <span className="text-[14px] text-center">
+              Feeling Blue? Dont worry we are here for you
+            </span>
+          </div>
+          <div className="w-[500px] h-auto rounded-lg">
+            <img
+              src={Gif1}
+              alt="gif1"
+              className="object-cover w-full rounded-lg"
+            />
+          </div>
           <div
             onClick={loginWithGoogle}
-            className="flex items-center justify-center  gap-2 px-4 py-2 rounded-md bg-cardOverlay cursor-pointer hover:bg-card hover:shadow-md duration-100 ease-in-out transition-all"
+            className="flex items-center justify-center  gap-2 px-6 py-4 rounded-md bg-[#4285f4] text-white cursor-pointer hover:bg-[#4f68b2] duration-100 ease-in-out transition-all"
           >
-            <FcGoogle className="text-xl" />
-            <p>Signin with Google</p>
+            <ImGoogle size={30} />
+            <p className="">Sign In With Google</p>
           </div>
         </div>
       </div>

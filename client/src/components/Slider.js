@@ -106,19 +106,23 @@ const Slider = () => {
     }
   };
   return (
-    <div className="w-full overflow-hidden px-[59px]">
-      <div className=" flex gap-8  w-full pt-8">
-        {banner?.map((item, index) => (
-          <img
-            key={item.encodeId}
-            src={item.banner}
-            alt="banner"
-            onClick={() => handleClickBanner(item)}
-            className={`slider-item flex-1 object-contain w-[30%] rounded-md ${
-              index <= 2 ? "block" : "hidden"
-            }`}
-          />
-        ))}
+    <div className="w-full overflow-hidden px-[59px] pt-5">
+      <div className="flex flex-col gap-5">
+        <h3 className="text-5 font-bold text-[#4285f4]">Spotlight today</h3>
+
+        <div className=" flex gap-8  w-full">
+          {banner?.map((item, index) => (
+            <img
+              key={item.encodeId}
+              src={item.banner}
+              alt="banner"
+              onClick={() => handleClickBanner(item)}
+              className={`slider-item flex-1 object-contain w-[30%] rounded-md ${
+                index <= 2 ? "block" : "hidden"
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

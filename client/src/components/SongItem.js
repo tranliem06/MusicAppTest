@@ -6,6 +6,7 @@ import "moment/locale/vi";
 // import * as actions from "../store/actions";
 import { useStateValue } from "../Context/StateProvider";
 import { actionType } from "../Context/reducer";
+import { NewRelease } from ".";
 
 const SongItem = ({
   thumbnail,
@@ -16,14 +17,45 @@ const SongItem = ({
   order,
   percent,
   style,
+  state,
 }) => {
-  const [{ isSongPlaying, curSongId, isSongZingPlaying }, dispatch] =
-    useStateValue();
+  const [
+    {
+      isSongPlaying,
+      curSongId,
+      isSongZingPlaying,
+      newRelease,
+      isPlayListAllSong,
+      isPlayListZing,
+    },
+    dispatch,
+  ] = useStateValue();
 
+  console.log(state);
   return (
     <div
       onClick={() => {
         // dispatch(actions.setCurSongId(sid));
+        if (state === 0) {
+          dispatch({
+            type: actionType.SET_PLAYLIST_ZING,
+            curPlaylistZing: newRelease.items.vPop,
+          });
+        } else {
+          dispatch({
+            type: actionType.SET_PLAYLIST_ZING,
+            curPlaylistZing: newRelease.items.others,
+          });
+        }
+
+        dispatch({
+          type: actionType.SET_PLAYLIST_ALL_SONG,
+          isPlayListAllSong: false,
+        });
+        dispatch({
+          type: actionType.SET_PLAYLIST_FROM_ZING,
+          isPlayListZing: true,
+        });
         dispatch({
           type: actionType.SET_SONG_PLAYING,
           isSongPlaying: false,
@@ -37,7 +69,7 @@ const SongItem = ({
           isSongZingPlaying: true,
         });
       }}
-      className={`w-[30%] flex-auto flex p-[10px] gap-[10px] justify-between items-center rounded-md cursor-pointer ${
+      className={`w-[30%] flex-auto flex  gap-[10px] justify-between items-center rounded-md cursor-pointer hover:bg-blue-200 ${
         style || "text-black hover:bg-main-200"
       }`}
     >

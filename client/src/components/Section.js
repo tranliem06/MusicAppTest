@@ -37,11 +37,11 @@ const Section = ({ data }) => {
                   navigate(item?.link?.split(".")[0]);
                 }}
               >
-                <div>
+                <div className="overflow-hidden rounded-lg">
                   <img
                     src={item.thumbnailM}
                     alt="songCover"
-                    className="w-full h-auto object-contain rounded-lg"
+                    className="w-full h-auto object-contain rounded-lg hover:scale-125"
                   />
                 </div>
                 <div className="flex flex-col">

@@ -14,10 +14,12 @@ import {
   Filter,
   Section,
   NewRelease,
+  ChartSection,
 } from "../components";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { Link } from "react-router-dom";
+// import ChartSection from "./ChartSection";
 
 const Home = () => {
   const [
@@ -93,6 +95,9 @@ const Home = () => {
               </div>
             ))}
           </div>
+          {/* <div>
+            <ChartSection />
+          </div> */}
 
           <div className="mt-12 px-[59px] flex flex-col gap-5">
             <div className="flex items-center justify-between">
