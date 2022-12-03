@@ -35,6 +35,8 @@ export const initialState = {
   chart: {},
   rank: [],
 
+  searchData: null,
+
   //** STOP PLAYLIST ALL SONG */
   isPlayListAllSong: false,
   isPlayListZing: false,

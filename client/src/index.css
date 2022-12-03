@@ -60,9 +60,12 @@ code {
   transform: scale(1.2);
 }
 
-.rhap_download-progress,
+.rhap_download-progress {
+  background-color: #9fc1f8cb !important;
+}
+
 .rhap_volume-bar {
-  background-color: #4c8ef8cb !important;
+  background-color: #4285f4 !important;
 }
 
 @tailwind base;

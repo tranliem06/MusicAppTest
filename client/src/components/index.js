@@ -42,3 +42,8 @@ export { default as ChartSection } from "./ChartSection";
 export { default as SongItemHome } from "./SongItemHome";
 export { default as Artist } from "./Artist";
 export { default as Artists } from "./Artists";
+export { default as Search } from "./Search";
+export { default as SearchSong } from "./SearchSong";
+export { default as SearchAll } from "./SearchAll";
+export { default as SectionItem } from "./SectionItem";
+export { default as ArtistZing } from "./ArtistZing";

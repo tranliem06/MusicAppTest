@@ -156,6 +156,7 @@ const Home = () => {
                   title={item.name}
                   artists={item.artist}
                   index={index}
+                  key={index}
                 />
               ))}
             </div>

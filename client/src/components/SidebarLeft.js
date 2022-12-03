@@ -8,15 +8,15 @@ import { useNavigate } from "react-router-dom";
 // import path from "./../ultis/path";
 
 const notActiveStyle =
-  "py-2 px-[25px] text-[13px] font-semibold flex gap-[12px] items-center text-[#32323d] ";
+  "py-2 px-[25px] text-[13px] font-semibold flex gap-[12px] items-center text-[#32323d]  hover:bg-[#bfdbfe]";
 const activeStyle =
-  "py-2 px-[25px] text-[13px] font-semibold flex gap-[12px] items-center text-[#4285f4] ";
+  "py-2 px-[25px] text-[13px] font-semibold flex gap-[12px] items-center text-[#4285f4] hover:bg-[#bfdbfe]";
 
 const SidebarLeft = () => {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col h-full pt-4">
-      <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full pt-4 px-4">
+      <div className="flex flex-col h-full ">
         {sidebarMenu.map((item) => (
           <NavLink
             to={item.path}

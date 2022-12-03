@@ -4,7 +4,7 @@ import { GetDetailPlaylist } from "../api";
 import moment from "moment";
 import { Scrollbars } from "react-custom-scrollbars-2";
 
-import { Lists, Loading2, Loading } from "../components";
+import { Lists, Loading2 } from "../components";
 import { actionType } from "../Context/reducer";
 import { useStateValue } from "../Context/StateProvider";
 

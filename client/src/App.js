@@ -26,6 +26,9 @@ import {
   Artists,
   Artist,
   WeekRank,
+  Search,
+  SearchSong,
+  SearchAll,
 } from "./components";
 
 import { useStateValue } from "./Context/StateProvider";
@@ -114,7 +117,7 @@ function App() {
         setIsLoading(true);
 
         // ...
-        const resquestUrl = "https://api-zingmp3-public.herokuapp.com/api/home";
+        const resquestUrl = "http://localhost:5000/api/home";
         const response = await fetch(resquestUrl);
         const responseJSON = await response.json();
         // console.log("hello");
@@ -146,7 +149,13 @@ function App() {
             <Route path="album/:title/:pid" element={<Album />} />
             <Route path="playlist/:title/:pid" element={<Album />} />
             <Route path="allartists" element={<Artists />} />
-            <Route path="allartists/:name" element={<Artist />} />
+            {/* <Route path="allartists/:name" element={<Artist />} /> */}
+
+            <Route path="tim-kiem/" element={<Search />}>
+              <Route path="tat-ca/" element={<SearchAll />} />
+
+              <Route path="bai-hat/" element={<SearchSong />} />
+            </Route>
             {/* <Route path="zing-chart-tuan/:title/:pid" element={<WeekRank />} /> */}
           </Route>
           <Route path="/dashboard/*" element={<Dashboard />} />

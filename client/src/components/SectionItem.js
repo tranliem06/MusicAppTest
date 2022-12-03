@@ -1,8 +1,8 @@
 import React, { memo, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import icons from "../ultis/icons";
+import icons from "../utils/icons";
 
-const { AiOutlineHeart, BsFillPlayFill, BsThreeDots } = icons;
+const { AiOutlineHeart, BsThreeDots } = icons;
 
 const SectionItem = ({
   link,
@@ -33,43 +33,24 @@ const SectionItem = ({
       }}
       className="flex flex-col gap-3 flex-auto justify-start w-1/5 text-sm cursor-pointer"
     >
-      <div
-        onMouseEnter={handleHover}
-        onMouseLeave={handleLeave}
-        className="w-full relative overflow-hidden rounded-lg"
-      >
-        {isHover && (
-          <div className="absolute top-0 bottom-0 z-40 left-0 right-0 bg-overlay-30 rounded-lg text-white flex items-center justify-center gap-3">
-            <span>
-              <AiOutlineHeart size={25} />
-            </span>
-            <span
-              onClick={(e) => {
-                e.stopPropagation();
-                navigate(link?.split(".")[0], { state: { playAlbum: true } });
-              }}
-              className="p-1 border border-white rounded-full"
-            >
-              <BsFillPlayFill size={35} />
-            </span>
-            <span>
-              <BsThreeDots size={25} />
-            </span>
-          </div>
-        )}
-        <img
-          ref={imageRef}
-          src={thumbnailM}
-          alt="avatar"
-          className="w-full h-auto rounded-lg"
-        />
+      <div className="w-full relative overflow-hidden rounded-lg">
+        <div className="overflow-hidden">
+          <img
+            ref={imageRef}
+            src={thumbnailM}
+            alt="avatar"
+            className="w-full h-auto rounded-lg hover:scale-125"
+          />
+        </div>
       </div>
       <span className="flex flex-col">
-        <span className="font-semibold">{title}</span>
+        <span className="text-[12px] font-semibold">
+          {title?.length > 20 ? title.slice(0, 20) + "..." : title}
+        </span>
         {data?.sectionId === "h100" ? (
           <span>{artistsNames}</span>
         ) : (
-          <span>
+          <span className="text-[12px]">
             {sortDescription?.length >= 40
               ? `${sortDescription?.slice(0, 40)}...`
               : sortDescription}

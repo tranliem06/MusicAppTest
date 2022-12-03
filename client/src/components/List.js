@@ -50,6 +50,7 @@ const List = ({ songData }) => {
           <span>
             <BsMusicNoteBeamed />
           </span>
+
           <img
             src={songData?.thumbnail}
             alt="thumbnail"
@@ -71,6 +72,7 @@ const List = ({ songData }) => {
           ? `${songData?.album?.title.slice(0, 30)}...`
           : songData?.album?.title}
       </div>
+
       <div className="w-[10%]  flex justify-end">
         {moment.utc(songData?.duration * 1000).format("mm:ss")}
       </div>

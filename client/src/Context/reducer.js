@@ -26,6 +26,8 @@ export const actionType = {
 
   LOADING: "LOADING",
   LOADING_HOME: "LOADING_HOME",
+
+  SEARCH: "SEARCH",
 };
 
 const reducer = (state, action) => {
@@ -195,6 +197,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         isLoadingHome: action.isLoadingHome,
+      };
+
+    case actionType.SEARCH:
+      return {
+        ...state,
+        searchData: action.searchData,
       };
 
     default:

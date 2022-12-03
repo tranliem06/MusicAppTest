@@ -1,16 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { actionType } from "../Context/reducer";
 import { useStateValue } from "../Context/StateProvider";
 
-const SearchBar = () => {
-  const [{ searchTerm }, dispatch] = useStateValue();
+import { Search } from "../api/index";
+import { useNavigate, createSearchParams } from "react-router-dom";
 
-  const setSearchTerm = (value) => {
-    dispatch({
-      type: actionType.SET_SEARCH_TERM,
-      searchTerm: value,
-    });
+const SearchBar = () => {
+  const [keyword, setKeyword] = useState("");
+  const [{ searchData }, dispatch] = useStateValue();
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   window.addEventListener("keyup", handleSearch);
+  //   return () => {
+  //     window.removeEventListener("keyup", handleSearch);
+  //   };
+  // }, []);
+
+  const handleSearch = (e) => {
+    // setKeyword(e.target.value);
+    if (e.keyCode === 13) {
+      // const response = await Search(keyword);
+      // console.log(response);
+      // dispatch({
+      //   type: actionType.SEARCH,
+      //   searchData: response.data.data,
+      // });
+      // console.log(keyword);
+
+      navigate({
+        pathname: "/tim-kiem/tat-ca",
+        search: createSearchParams({
+          q: keyword,
+        }).toString(),
+      });
+    }
+
+    // navigate(``);
   };
 
   return (
@@ -19,11 +46,12 @@ const SearchBar = () => {
         <IoSearch className="text-2xl text-white" />
         <input
           type="text"
-          value={searchTerm}
+          value={keyword}
           className="w-full h-full bg-transparent text-lg text-white  border-none outline-none placeholder:text-white"
           placeholder="Search here ...."
           spellCheck="false"
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => setKeyword(e.target.value)}
+          onKeyUp={handleSearch}
         />
       </div>
     </div>
