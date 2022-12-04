@@ -93,6 +93,17 @@ module.exports = {
             transform: "translateX(0);",
           },
         },
+
+        "scale-up-center": {
+          "0%": {
+            "-webkit-transform": "scale(0);",
+            transform: "scale(0);",
+          },
+          "100%": {
+            "-webkit-transform": "scale(1);",
+            transform: "scale(1);",
+          },
+        },
       },
       animation: {
         "slide-right":

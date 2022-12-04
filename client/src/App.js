@@ -153,6 +153,7 @@ function App() {
             <Route path="playlist/:title/:pid" element={<Album />} />
             <Route path="allartists" element={<Artists />} />
             <Route path="nghe-si/:singer" element={<Singer />} />
+            <Route path=":singer" element={<Singer />} />
             {/* <Route path="allartists/:name" element={<Artist />} /> */}
 
             <Route path="tim-kiem/" element={<Search />}>

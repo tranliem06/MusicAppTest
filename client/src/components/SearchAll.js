@@ -113,7 +113,7 @@ const SearchAll = () => {
         {/* artitst */}
         <div className="flex flex-col w-full  mt-4">
           <h3 className="text-lg font-bold text-[#32323d] mb-4">Artists</h3>
-          <div className="flex  w-full gap-[28px] mb-[500px]">
+          <div className="flex flex-wrap justify-between  w-full gap-[28px] mb-[500px]">
             {searchData?.artists.slice(0, 5).map((item, index) => (
               <ArtistZing
                 key={item.id}

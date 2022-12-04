@@ -33,6 +33,8 @@ export const actionType = {
   DATA_FOR_RENDER: "DATA_FOR_RENDER",
 
   PLAYLIST_ON_OFF: "PLAYLIST_ON_OFF",
+
+  SET_ARTIST_DATA: "SET_ARTIST_DATA",
 };
 
 const reducer = (state, action) => {
@@ -223,6 +225,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         playlistOnOff: action.playlistOnOff,
+      };
+    case actionType.SET_ARTIST_DATA:
+      return {
+        ...state,
+        artistData: action.artistData,
       };
 
     default:
