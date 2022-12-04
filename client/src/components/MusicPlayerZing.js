@@ -16,14 +16,16 @@ import { async } from "@firebase/util";
 
 const MusicPlayerZing = () => {
   // const [isPlayList, setIsPlayList] = useState(false);
+
+  const [isActive, setIsActive] = useState(false);
+  const isActiveStyles = "bg-blue-400 text-white rounded-md text-white p-1";
   const [
     {
       curSongId,
       curPlaylistZing,
       isSongZingPlaying,
       miniPlayer,
-      isCurrentSongVip,
-      isPlayListZing,
+      playlistOnOff,
     },
     dispatch,
   ] = useStateValue();
@@ -122,7 +124,7 @@ const MusicPlayerZing = () => {
   // }, [song]);
 
   return (
-    <div className="w-full h-[96px] full flex items-center gap-3 overflow-hidden bg-gray-50 z-50">
+    <div className="w-full h-[96px] full flex items-center gap-3 overflow-hidden bg-[#fffdfc] z-50">
       <div
         className={`w-full full items-center gap-3 p-4  ${
           miniPlayer ? "hidden" : "flex relative"
@@ -169,12 +171,19 @@ const MusicPlayerZing = () => {
               whileTap={{ scale: 0.8 }}
               onClick={() => {
                 dispatch({
-                  type: actionType.SET_PLAYLIST_FROM_ZING,
-                  isPlayListZing: !isPlayListZing ? true : false,
+                  type: actionType.PLAYLIST_ON_OFF,
+                  playlistOnOff: !playlistOnOff ? true : false,
                 });
+                setIsActive(!isActive ? true : false);
               }}
+              className={`${isActive ? isActiveStyles : ""}`}
             >
-              <RiPlayListFill className="text-textColor hover:text-headingColor text-3xl cursor-pointer w-6 h-6" />
+              <RiPlayListFill
+                className={`"text-textColor hover:text-headingColor text-3xl cursor-pointer w-6 h-6" ${
+                  isActive ? "text-white hover:text-white" : ""
+                } `}
+                size={isActive ? 22 : 20}
+              />
             </motion.i>
           </div>
         </div>

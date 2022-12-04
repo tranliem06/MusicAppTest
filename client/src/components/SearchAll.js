@@ -6,7 +6,7 @@ import { handleNumber } from "./../utils/supportfunctions";
 import { SongItem, SectionItem, ArtistZing } from "./";
 import { BsMusicNoteBeamed } from "react-icons/bs";
 import Scrollbars from "react-custom-scrollbars-2";
-
+import { Link } from "react-router-dom";
 const SearchAll = () => {
   const [{ searchData }, dispatch] = useStateValue();
   return (
@@ -19,7 +19,10 @@ const SearchAll = () => {
             {searchData?.top && (
               <div className="px-[10px] rounded-md flex gap-8 items-center ">
                 <div className="flex gap-6 w-[30%] ">
-                  <div className="overflow-hidden rounded-full">
+                  <Link
+                    to={searchData.top.link}
+                    className="overflow-hidden rounded-full"
+                  >
                     <img
                       src={searchData.top.thumbnail}
                       alt="avatar"
@@ -27,14 +30,17 @@ const SearchAll = () => {
                       hover:scale-125
                       "
                     />
-                  </div>
+                  </Link>
                   <div className="flex flex-col text-xs">
                     <span className="mb-[6px]">
                       {searchData.top.objectType === "artist" ? "Aritsts" : ""}
                     </span>
-                    <span className="text-sm font-semibold">
+                    <Link
+                      to={searchData.top.link}
+                      className="text-sm font-semibold hover:text-[#4285f4]"
+                    >
                       {searchData.top.title || searchData.top.name}
-                    </span>
+                    </Link>
                     {searchData.top.objectType === "artist" && (
                       <span>
                         {handleNumber(searchData.artists[0]?.totalFollow) +
@@ -114,6 +120,7 @@ const SearchAll = () => {
                 title={item.name}
                 image={item.thumbnailM}
                 follower={item.totalFollow}
+                link={item.link}
               />
             ))}
           </div>

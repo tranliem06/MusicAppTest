@@ -13,7 +13,7 @@ const Album = () => {
   const { title, pid } = useParams();
   // console.log({ title, pid });
 
-  const [{ curPlaylistZing, isLoading }, dispatch] = useStateValue();
+  const [{ dataForRenderAlbum, isLoading }, dispatch] = useStateValue();
 
   const [playlistData, setPlaylistData] = useState({});
   useEffect(() => {
@@ -33,8 +33,8 @@ const Album = () => {
       if (response?.data.err === 0) {
         setPlaylistData(response.data?.data);
         dispatch({
-          type: actionType.SET_PLAYLIST_ZING,
-          curPlaylistZing: response?.data?.data?.song?.items,
+          type: actionType.DATA_FOR_RENDER,
+          dataForRenderAlbum: response?.data?.data?.song?.items,
         });
       }
     };

@@ -28,6 +28,11 @@ export const actionType = {
   LOADING_HOME: "LOADING_HOME",
 
   SEARCH: "SEARCH",
+  SEARCH_SONG: "SEARCH_SONG",
+
+  DATA_FOR_RENDER: "DATA_FOR_RENDER",
+
+  PLAYLIST_ON_OFF: "PLAYLIST_ON_OFF",
 };
 
 const reducer = (state, action) => {
@@ -203,6 +208,21 @@ const reducer = (state, action) => {
       return {
         ...state,
         searchData: action.searchData,
+      };
+    case actionType.SEARCH_SONG:
+      return {
+        ...state,
+        searchSongData: action.searchSongData,
+      };
+    case actionType.DATA_FOR_RENDER:
+      return {
+        ...state,
+        dataForRenderAlbum: action.dataForRenderAlbum,
+      };
+    case actionType.PLAYLIST_ON_OFF:
+      return {
+        ...state,
+        playlistOnOff: action.playlistOnOff,
       };
 
     default:

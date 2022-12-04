@@ -14,6 +14,8 @@ export const initialState = {
   miniPlayer: false,
 
   //**TEST FOR ZINGMP3 */
+  playlistOnOff: false,
+
   banner: [],
   curSongId: null,
   curPlaylistZing: null,
@@ -35,7 +37,12 @@ export const initialState = {
   chart: {},
   rank: [],
 
+  dataForRenderAlbum: null,
+
   searchData: null,
+
+  searchSongData: null,
+  artistData: null,
 
   //** STOP PLAYLIST ALL SONG */
   isPlayListAllSong: false,

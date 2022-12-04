@@ -1,10 +1,10 @@
 import React from "react";
-import { useEffect } from "react";
-import { getAllSongs } from "../api";
+// import { useEffect } from "react";
+// import { getAllSongs } from "../api";
 import { actionType } from "../Context/reducer";
 import { useStateValue } from "../Context/StateProvider";
 import { motion } from "framer-motion";
-import { IoMusicalNote } from "react-icons/io5";
+// import { IoMusicalNote } from "react-icons/io5";
 
 const PlayListCardZing = () => {
   const [

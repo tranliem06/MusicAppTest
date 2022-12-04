@@ -8,7 +8,7 @@ const { BsDot } = icons;
 
 const Lists = ({ totalDuration }) => {
   // console.log({ songs, totalDuration });
-  const [{ curPlaylistZing }, dispatch] = useStateValue();
+  const [{ dataForRenderAlbum }, dispatch] = useStateValue();
 
   return (
     <div className=" w-full flex flex-col text-xs text-gray-600">
@@ -25,13 +25,13 @@ const Lists = ({ totalDuration }) => {
       </div>
 
       <div className="flex flex-col">
-        {curPlaylistZing?.map((item) => (
+        {dataForRenderAlbum?.map((item) => (
           <List key={item.encodeId} songData={item} />
         ))}
       </div>
 
       <span className="flex items-center gap-2 px-4 py-[10px] border-t border-blue-500">
-        <span>{`${curPlaylistZing?.length} songs`}</span>
+        <span>{`${dataForRenderAlbum?.length} songs`}</span>
         <BsDot size={24} />
         <span>{moment.utc(totalDuration * 1000).format("HH:mm:ss")}</span>
       </span>

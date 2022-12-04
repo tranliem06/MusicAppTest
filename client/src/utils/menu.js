@@ -26,3 +26,23 @@ export const sidebarMenu = [
     icons: <HiUserGroup size={24} />,
   },
 ];
+
+export const searchMenu = [
+  {
+    path: "tat-ca",
+    text: "All",
+  },
+
+  {
+    path: "bai-hat",
+    text: "Songs",
+  },
+  {
+    path: "playlist",
+    text: "Playlist/Album",
+  },
+  {
+    path: "artist",
+    text: "Artists",
+  },
+];

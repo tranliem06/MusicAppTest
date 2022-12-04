@@ -47,3 +47,6 @@ export { default as SearchSong } from "./SearchSong";
 export { default as SearchAll } from "./SearchAll";
 export { default as SectionItem } from "./SectionItem";
 export { default as ArtistZing } from "./ArtistZing";
+export { default as Singer } from "./Singer";
+export { default as SearchPlaylist } from "./SearchPlaylist";
+export { default as SearchArtist } from "./SearchArtist";

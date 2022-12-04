@@ -89,10 +89,10 @@ const Slider = () => {
   const handleClickBanner = (item) => {
     // console.log(item);
     // console.log("hello");
-    dispatch({
-      type: actionType.SET_PLAYLIST_FROM_ZING,
-      isPlayListZing: false,
-    });
+    // dispatch({
+    //   type: actionType.SET_PLAYLIST_FROM_ZING,
+    //   isPlayListZing: true,
+    // });
     if (item?.type === 1) {
       dispatch({
         type: actionType.SET_CUR_SONG_ID,

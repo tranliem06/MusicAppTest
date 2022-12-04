@@ -15,7 +15,7 @@ const Section = ({ data }) => {
       onClick={() => {
         dispatch({
           type: actionType.SET_PLAYLIST_FROM_ZING,
-          isPlayListZing: false,
+          isPlayListZing: true,
         });
       }}
     >

@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { actionType } from "../Context/reducer";
 import { useStateValue } from "../Context/StateProvider";
 import { GetSearchData } from "../api";
-import { useState } from "react";
 import { Loading2 } from "./";
-import { Scrollbars } from "react-custom-scrollbars-2";
+import { NavLink, useSearchParams } from "react-router-dom";
+
+import { searchMenu } from "../utils/menu";
 
 const Search = () => {
+  // const [searchParams] = useSearchParams();
+  // console.log(searchParams);
   //   const [data, setData] = useState({});
 
   const [{ searchData, isLoading }, dispatch] = useStateValue();
@@ -17,7 +20,10 @@ const Search = () => {
   });
 
   let keyword = params.q;
+
+  console.log("hello");
   console.log(keyword);
+  console.log(keyword.split(" ").join("+"));
 
   useEffect(() => {
     const fetchSearchData = async () => {
@@ -61,15 +67,19 @@ const Search = () => {
         </span>
 
         <div className="flex items-center">
-          <span className="px-4 hover:text-[#4285f4] font-semibold cursor-pointer ">
-            All
-          </span>
-          <span className="px-4 hover:text-[#4285f4] font-semibold cursor-pointer ">
-            Songs
-          </span>
-          <span className="px-4 hover:text-[#4285f4] font-semibold cursor-pointer ">
-            Playlist/Album
-          </span>
+          {searchMenu.map((item) => (
+            <NavLink
+              key={item.path}
+              to={`${item.path}?q=${keyword.split(" ").join("+")}`}
+              className={({ isActive }) =>
+                isActive
+                  ? "px-4  font-semibold cursor-pointer  text-[#4285f4]"
+                  : "px-4 hover:text-[#4285f4] font-semibold cursor-pointer"
+              }
+            >
+              {item.text}
+            </NavLink>
+          ))}
         </div>
       </div>
       <div className="w-full h-full">

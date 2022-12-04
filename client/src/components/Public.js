@@ -13,7 +13,8 @@ import { motion } from "framer-motion";
 // import { Scrollbars } from "react-custom-scrollbars-2";
 
 const Public = () => {
-  const [{ isSongPlaying, isSongZingPlaying }, dispatch] = useStateValue();
+  const [{ isSongPlaying, isSongZingPlaying, playlistOnOff }, dispatch] =
+    useStateValue();
 
   return (
     <div className=" w-full flex flex-col min-h-screen ">
@@ -29,9 +30,11 @@ const Public = () => {
           <div className="flex-auto mt-4 ">
             <Outlet />
           </div>
-          <div className="w-[329px] shadow-md  flex-none animate-slide-left">
-            <SidebarRight />
-          </div>
+          {playlistOnOff && (
+            <div className="w-[329px] shadow-md  flex-none animate-slide-left">
+              <SidebarRight />
+            </div>
+          )}
         </div>
         {/* <div className="w-[329px] hidden 1600:flex flex-none border border-green-500 animate-slide-left">
           <SidebarRight />

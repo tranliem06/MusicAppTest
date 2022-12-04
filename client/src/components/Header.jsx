@@ -39,12 +39,6 @@ const Header = () => {
         </NavLink>
       </div>
 
-      {/* <ul className="flex flex-auto items-center justify-center">
-        <li className="mx-5 text-[10px]"><NavLink to={'/home'} className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}>Home</NavLink></li>
-        <li className="mx-5 text-[10px]"><NavLink to={'/musics'} className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}>Musics</NavLink></li>
-        <li className="mx-5 text-[10px]"><NavLink to={'/premium'} className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}>Premium</NavLink></li>
-        <li className="mx-5 text-[10px]"><NavLink to={'/contact'} className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}>Contact</NavLink></li>
-      </ul> */}
       <div className="w-[40%]">
         <SearchBar />
       </div>
@@ -57,7 +51,7 @@ const Header = () => {
         >
           <div className="flex w-[160px] justify-center items-center gap-2 ">
             <div>
-              <p className="text-textColor text-lg hover:text-headingColor ">
+              <p className="[#text-[#32323d] font-bold text-lg hover:text-headingColor ">
                 {user?.user.name}
               </p>
               {/* <p className="flex items-center gap-2 text-xs text-gray-500 font-normal">
@@ -66,7 +60,7 @@ const Header = () => {
               </p> */}
             </div>
             <img
-              className="w-12 min-w-[44px] object-cover rounded-full shadow-lg"
+              className="w-12 min-w-[44px] object-cover rounded-full "
               src={user?.user?.imageURL}
               alt=""
               referrerPolicy="no-referrer"

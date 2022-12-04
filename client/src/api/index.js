@@ -164,3 +164,21 @@ export const GetSearchData = (keyword) =>
       reject(error);
     }
   });
+
+export const GetSearchSongs = (singerId) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios2({
+        url: "/artistsong",
+        method: "get",
+        params: {
+          id: singerId,
+          page: 1,
+          count: 50,
+        },
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });

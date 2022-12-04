@@ -27,7 +27,7 @@ const NewRelease = () => {
           type="button"
           onClick={() => setIsActived(0)}
           className={`py-1 px-4 rounded-l-full rounded-r-full border border-[#4285f4] bg-transparent ${
-            isActived === 0 && "bg-[#4285f4] border-none text-white"
+            isActived === 0 && "bg-blue-500 border-none text-white"
           }`}
         >
           VIETNAMESE

@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useStateValue } from "../Context/StateProvider";
 import { IoMdClose } from "react-icons/io";
-import { IoArrowRedo, IoArrowUndo, IoMusicalNote } from "react-icons/io5";
+import { IoArrowRedo } from "react-icons/io5";
 import { motion } from "framer-motion";
 
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { actionType } from "../Context/reducer";
-import { MdPlaylistPlay } from "react-icons/md";
-import { getAllSongs } from "../api";
+// import { MdPlaylistPlay } from "react-icons/md";
+// import { getAllSongs } from "../api";
 import { RiPlayListFill } from "react-icons/ri";
-import { PlayListCard } from "./";
+// import { PlayListCard } from "./";
 
 const MusicPlayer = () => {
   // const [isPlayList, setIsPlayList] = useState(false);
   const [
-    { allSongs, song, isSongPlaying, miniPlayer, isPlayListAllSong },
+    { allSongs, song, isSongPlaying, miniPlayer, playlistOnOff },
     dispatch,
   ] = useStateValue();
 
@@ -80,7 +80,7 @@ const MusicPlayer = () => {
   }, [song]);
 
   return (
-    <div className="w-full h-[96px] full flex items-center gap-3 overflow-hidden bg-gray-50 z-50">
+    <div className="w-full h-[96px] full flex items-center gap-3 overflow-hidden bg-[#fffdfc] z-50">
       <div
         className={`w-full full items-center gap-3 p-4  ${
           miniPlayer ? "hidden" : "flex relative"
@@ -127,8 +127,8 @@ const MusicPlayer = () => {
               whileTap={{ scale: 0.8 }}
               onClick={() => {
                 dispatch({
-                  type: actionType.SET_PLAYLIST_ALL_SONG,
-                  isPlayListAllSong: !isPlayListAllSong ? true : false,
+                  type: actionType.PLAYLIST_ON_OFF,
+                  playlistOnOff: !playlistOnOff ? true : false,
                 });
               }}
             >
